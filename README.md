@@ -1,7 +1,5 @@
 # Debated AI
 
-[![Site preview](/public/site-preview.png)](https://ahmadalaziz.com)
-
 ## Install & run
 
 Make sure you have nodejs `18.0.0` or higher and npm `8.6.0` or higher installed. Install dependencies with:
