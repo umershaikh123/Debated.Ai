@@ -1,0 +1,113 @@
+/* Chat.module.css */
+.container {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  margin-top: 10vh;
+  height: 90vh;
+  padding: 1.5%;
+  gap: 0.5rem;
+
+  /* background: linear-gradient(90deg, rgba(244, 244, 244, 0.85) 35%, rgba(214, 214, 214, 0.9) 100%); */
+}
+
+.controlPanel {
+  opacity: 0;
+  flex: 0;
+  width: 0%;
+
+  max-width: 35vw;
+  background-color: rgb(var(--rgbBackgroundLight));
+  border-bottom-left-radius: 1.5rem;
+  border-top-left-radius: 1.5rem;
+
+  @media (--mediaMobile), (--mediaMobileLS) {
+    max-width: 95vw;
+  }
+
+  &[data-full='true'] {
+    border-radius: 1.5rem;
+    max-width: 95vw;
+  }
+
+  transition-property: opacity, width, flex;
+  transition-duration: var(--durationL);
+  transition-timing-function: var(--bezierFastoutSlowin);
+
+  &[data-visible='true'] {
+    opacity: 1;
+    width: 100%;
+    flex: 1;
+  }
+}
+.chatArea {
+  background-color: rgb(var(--rgbBackgroundLight));
+  border-bottom-right-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
+  padding: 1rem;
+  overflow-y: auto;
+  flex-direction: column;
+  gap: 1rem;
+  display: flex;
+
+  /* max-width: 1200px; */
+  margin-right: auto;
+  margin-left: auto;
+
+  opacity: 0.5;
+  flex: 0;
+  width: 0;
+  padding: 0;
+
+  transition-property: opacity, border-radius, width, flex, padding;
+  transition-duration: var(--durationL);
+  transition-timing-function: var(--bezierFastoutSlowin);
+
+  &[data-rounded='true'] {
+    border-radius: 1.5rem;
+  }
+
+  &[data-visible='true'] {
+    opacity: 1;
+    width: 100%;
+    flex: 2.5;
+    padding: 1.5rem;
+  }
+}
+
+.title {
+  font-size: 2.25rem;
+  display: flex;
+  flex-direction: column;
+  font-weight: 800;
+  width: 100%;
+  text-align: center;
+  color: black;
+
+  margin-bottom: 0;
+}
+
+.main {
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.spaceAnimation {
+  width: 400px;
+}
+
+.emptyChatContainer {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.chatContainer {
+  /* max-width: 70vw; */
+  margin-bottom: 100px;
+}

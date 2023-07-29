@@ -8,7 +8,6 @@ export * from './SegmentedControl';
 export * from './Section';
 export * from './Navbar';
 export * from './Monogram';
-export * from './Model';
 export * from './Meta';
 export * from './Loader';
 export * from './List';
