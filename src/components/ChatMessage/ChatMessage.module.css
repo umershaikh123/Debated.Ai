@@ -1,0 +1,41 @@
+.avatar {
+  width: 42px;
+  height: 42px;
+  margin: 5px;
+  overflow: hidden;
+  border-radius: 20px;
+  border: 1px solid rgb(var(--rgbText) / 1);
+}
+
+.messageHeader {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.messageHeaderAssistant {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.chatBubble {
+  background-color: rgb(var(--rgbText) / 0.1);
+  padding: 10px;
+  border-radius: 10px;
+  width: fit-content;
+  max-width: 85%;
+}
+
+.chatBubbleAssistant {
+  background-color: rgb(var(--rgbAccent) / 0.15);
+  padding: 10px;
+  border-radius: 10px;
+  width: fit-content;
+  margin-left: auto;
+  max-width: 85%;
+}
+
+.messageContainer {
+  margin-top: 1.5rem;
+}
