@@ -1,0 +1,30 @@
+.canvas {
+  position: absolute;
+  margin-right: 1vw;
+  margin-left: auto;
+  margin-top: 20vh;
+  margin-bottom: auto;
+  inset: 0;
+  opacity: 0;
+  transition-property: opacity;
+  transition-duration: 3s;
+  transition-timing-function: var(--bezierFastoutSlowin);
+  place-content: center;
+
+  @media (--mediaTablet) {
+    margin-top: 0;
+    scale: 0.9;
+    width: 100%;
+  }
+
+  @media (--mediaMobile) {
+    scale: 0.8;
+    margin-top: -3rem;
+    margin-right: -5rem;
+    width: 100%;
+  }
+
+  &[data-visible='true'] {
+    opacity: 1;
+  }
+}

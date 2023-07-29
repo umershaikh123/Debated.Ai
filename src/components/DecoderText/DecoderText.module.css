@@ -1,0 +1,16 @@
+.text {
+  &::after {
+    content: '_';
+    visibility: hidden;
+  }
+}
+
+.glyph {
+  opacity: 0.8;
+  font-weight: var(--fontWeightRegular);
+  line-height: 0;
+}
+
+.value {
+  opacity: 1;
+}

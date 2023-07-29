@@ -1,0 +1,64 @@
+.text {
+  line-height: var(--lineHeightBody);
+  color: var(--colorTextBody);
+
+  &[data-size='xs'] {
+    font-size: var(--fontSizeBodyXS);
+  }
+
+  &[data-size='s'] {
+    font-size: var(--fontSizeBodyS);
+  }
+
+  &[data-size='m'] {
+    font-size: var(--fontSizeBodyM);
+  }
+
+  &[data-size='l'] {
+    font-size: var(--fontSizeBodyL);
+  }
+
+  &[data-size='xl'] {
+    font-size: var(--fontSizeBodyXL);
+  }
+  &[data-size='xxl'] {
+    font-size: var(--fontSizeBodyXXL);
+  }
+
+  &[data-align='auto'] {
+    text-align: inherit;
+  }
+
+  &[data-align='end'] {
+    text-align: end;
+    margin-left: auto;
+  }
+
+  &[data-align='start'] {
+    text-align: start;
+  }
+
+  &[data-align='center'] {
+    text-align: center;
+  }
+
+  &[data-weight='auto'] {
+    font-weight: inherit;
+  }
+
+  &[data-weight='regular'] {
+    font-weight: var(--fontWeightRegular);
+  }
+
+  &[data-weight='medium'] {
+    font-weight: var(--fontWeightMedium);
+  }
+
+  &[data-weight='bold'] {
+    font-weight: var(--fontWeightBold);
+  }
+
+  &[data-secondary='true'] {
+    color: var(--colorTextLight);
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "short_name": "Debated.AI",
+  "name": "Debated.AI",
+  "description": "Debated.AI is an AI-based platform offering engaging, automated debates on various topics. It's an educational and entertaining tool for exploring different perspectives through AI-powered discourse.",
+  "icons": [
+    {
+      "src": "/static/logo-64.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/logo-128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/logo-256.png",
+      "sizes": "256x256",
+      "purpose": "any maskable",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/logo-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#BD009A",
+  "background_color": "#141414",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/",
+  "orientation": "portrait"
+}

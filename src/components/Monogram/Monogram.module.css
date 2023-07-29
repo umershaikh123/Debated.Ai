@@ -1,0 +1,20 @@
+.monogram {
+  fill: var(--colorTextTitle);
+  transition: fill var(--durationL) ease;
+  width: max(min(60px, 60vw), 63px);
+  transition: var(--bezierFastoutSlowin);
+  transform: scale(0.8);
+
+  transition-property: transform, width;
+  transition-duration: var(--durationM);
+  transition-timing-function: var(--bezierFastoutSlowin);
+
+  &[data-scrolled='true'] {
+    width: max(min(55px, 45vw), 47px);
+  }
+
+  &:hover {
+    /* transition: transform 0.35s ease; */
+    transform: scale(0.95);
+  }
+}

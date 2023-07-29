@@ -1,0 +1,88 @@
+:root {
+  --mobileNavOffset: calc(var(--spaceOuter) * 2 + var(--space2XL));
+
+  --outlines: transparent;
+  --speed: 0.8s;
+  --delay-gap: 8;
+  --horse-width: 3.8rem;
+  --horse-height: 2.5rem;
+  --color-horse: rgb(var(--colorTextBody));
+  --color-horse-back: rgba(30, 30, 30, 1);
+  --color-hair: rgba(70, 70, 70, 1);
+  --color-hoof: rgba(0, 0, 0, 1);
+  --color-dust: #af540b;
+  --color-sky: #c4c4ff;
+}
+
+input[type='checkbox']:checked ~ label {
+  --outlines: white;
+  --speed: 8s;
+  --color-horse: rgba(50, 50, 50, 0.3);
+  --color-horse-back: rgba(30, 30, 30, 0.3);
+  --color-hair: rgba(70, 70, 70, 0.3);
+  --color-hoof: rgba(0, 0, 0, 0.3);
+}
+
+body {
+  font-family: var(--fontStack);
+  font-weight: var(--fontWeightRegular);
+  background-color: rgb(var(--rgbBackground));
+  transition: background var(--durationM) ease;
+  color: var(--colorTextBody);
+  width: 100vw;
+  overflow-x: hidden;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+:where(code, pre) {
+  font-family: var(--monoFontStack);
+}
+
+::selection {
+  background: rgb(var(--rgbAccent));
+  color: rgb(var(--rgbBlack));
+}
+
+:focus {
+  outline: 4px solid rgb(var(--rgbText));
+  outline-offset: 4px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes reveal {
+  0% {
+    transform: scale3d(0, 1, 1);
+    transform-origin: left;
+  }
+
+  50% {
+    transform: scale3d(1, 1, 1);
+    transform-origin: left;
+  }
+
+  51% {
+    transform: scale3d(1, 1, 1);
+    transform-origin: right;
+  }
+
+  100% {
+    transform: scale3d(0, 1, 1);
+    transform-origin: right;
+  }
+}
