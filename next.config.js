@@ -7,6 +7,9 @@ const withPWA = require('next-pwa')({
 module.exports = withPWA({
   reactStrictMode: false,
   pageExtensions: ['page.js', 'api.js', '.js'],
+  images: {
+    domains: ['ui-avatars.com', 'this-person-does-not-exist.com', 'lh3.googleusercontent.com'],
+  },
   webpack(config, { isServer }) {
     // Run custom scripts
     if (isServer) {
