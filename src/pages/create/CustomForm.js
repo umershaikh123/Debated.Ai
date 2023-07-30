@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useFormInput } from 'hooks';
 import { Input, Text, Heading, Button, DecoderText, Divider } from 'components';
 import Lottie from 'lottie-react';
@@ -8,6 +8,8 @@ import { tokens } from 'components/ThemeProvider/theme';
 import { getDelay } from './ControlPanel';
 import { SegmentedControl } from 'components';
 import { SegmentedControlOption } from 'components';
+import { getVoices } from 'pages/api/speach/functions';
+import VoiceDropdown from 'components/VoiceDropdown/VoiceDropdown';
 import { getAvatarsAndGenders } from 'pages/api/chat/functions';
 
 const texts = {
@@ -47,6 +49,16 @@ export const CustomForm = ({ status, delay, onBackClick, startChat }) => {
 
   const stageConfig = texts[stage];
 
+  const [voiceOptions, setVoiceOptions] = useState([]);
+  const [selectedVoice, setSelectedVoice] = useState({});
+  const [selectedVoice2, setSelectedVoice2] = useState({});
+
+  useEffect(() => {
+    getVoices().then(voices => {
+      setVoiceOptions(voices);
+    });
+  }, []);
+
   const handleSubmit = async e => {
     await e.preventDefault();
     if (stage === 'FIRST') {
@@ -72,13 +84,20 @@ export const CustomForm = ({ status, delay, onBackClick, startChat }) => {
         avatars: avatars,
         messagesCount: messagesCount.value,
         isAgreementOn: +agreementSelectorIndex,
+        voices: [selectedVoice, selectedVoice2],
       });
     }
   };
 
   const renderAIControls = (names, stances, personalities, examples, stage) => {
     const inputs = [names, stances, personalities];
-
+    const setVoice = voice => {
+      if (stage === 'FIRST') {
+        setSelectedVoice(voice);
+      } else {
+        setSelectedVoice2(voice);
+      }
+    };
     const elements = inputs.map((input, index) => (
       <Input
         key={index}
@@ -93,6 +112,9 @@ export const CustomForm = ({ status, delay, onBackClick, startChat }) => {
         {...input}
       />
     ));
+
+    // Add VoiceDropdown at the end of the elements
+    elements.push(<VoiceDropdown items={voiceOptions} onVoiceSelected={setVoice} />);
 
     return elements;
   };
