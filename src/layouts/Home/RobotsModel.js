@@ -18,6 +18,7 @@ import { cleanRenderer, cleanScene, degToRad, modelLoader, removeLights } from '
 import styles from './RobotsModel.module.css';
 import robotModelPath from 'assets/models/robots.glb';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { throttle } from 'utils/throttle';
 
 // Define lights
 const createLights = () => {
@@ -58,7 +59,9 @@ export const RobotsModel = props => {
       });
 
       renderer.setSize(innerWidth, innerHeight);
-      renderer.setPixelRatio(1.75);
+      const pixelRatio = Math.min(window.devicePixelRatio, 1.75);
+      console.log('window.devicePixelRatio', window.devicePixelRatio);
+      renderer.setPixelRatio(pixelRatio);
       rendererRef.current = renderer;
 
       const camera = new PerspectiveCamera(47, innerWidth / innerHeight, 0.1, 1000);
@@ -134,13 +137,22 @@ export const RobotsModel = props => {
 
   // Handle window resize
   useEffect(() => {
-    if (rendererRef.current && cameraRef.current) {
-      const { width, height } = windowSize;
+    const handleResize = () => {
+      if (rendererRef.current && cameraRef.current) {
+        const { width, height } = windowSize;
+        const adjustedWidth = width > 700 ? width / 2.5 : width / 1.2;
+        rendererRef.current.setSize(adjustedWidth, height);
+        cameraRef.current.aspect = adjustedWidth / height;
+        cameraRef.current.updateProjectionMatrix(); // Immediately reflect changes in aspect ratio
+      }
+    };
 
-      const adjustedWidth = width > 700 ? width / 2.5 : width / 1.2;
-      rendererRef.current.setSize(adjustedWidth, height);
-      cameraRef.current.aspect = adjustedWidth / height;
-      cameraRef.current.updateProjectionMatrix();
+    const throttledHandleResize = throttle(handleResize, 200);
+
+    if (isInViewport) {
+      handleResize(); // Call immediately for initial adjustment
+      window.addEventListener('resize', throttledHandleResize);
+      return () => window.removeEventListener('resize', throttledHandleResize);
     }
   }, [windowSize, isInViewport]);
 
