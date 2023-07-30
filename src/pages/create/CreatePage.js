@@ -9,12 +9,14 @@ import spaceAnimation from 'assets/lottie/space.json';
 import { Text } from 'components';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { delay } from 'utils/delay';
+import { generateVoice } from 'pages/api/speach/functions';
 
 export const CreatePage = () => {
   const [typing, setTyping] = useState(false);
   const [currentRole, setCurrentRole] = useState('user');
   const [chatHistory, setChatHistory] = useState([]);
   const [names, setNames] = useState([]);
+  const [audio, setAudio] = useState(null);
   const [avatars, setAvatars] = useState([]);
 
   const isMobile = useIsMobile();
@@ -54,6 +56,22 @@ export const CreatePage = () => {
     setIsControlPanelVisible(false);
   };
 
+  // Create a helper function that plays the audio and resolves when the audio ends
+  const playAudio = async audioUrl => {
+    if (!audioUrl) {
+      return null;
+    }
+
+    return new Promise((resolve, reject) => {
+      const audio = new Audio(audioUrl);
+      audio.onloadeddata = () => {
+        audio.play().catch(reject);
+      };
+      audio.onended = resolve;
+      audio.onerror = reject;
+    });
+  };
+
   // Simulates a chat conversation with alternating user and AI messages
   const startChat = async ({
     names,
@@ -62,9 +80,12 @@ export const CreatePage = () => {
     avatars,
     messagesCount,
     isAgreementOn,
+    voices,
   }) => {
     await resetChat({ names, avatars });
     const initialMessage = await startDebate(names, stances, personalities, messagesCount);
+
+    const initialVoice = await generateVoice(voices[0], initialMessage);
 
     let lastMessage = {
       role: 'user',
@@ -75,9 +96,11 @@ export const CreatePage = () => {
     setChatHistory(chatMessages);
     setTyping(false);
 
+    await playAudio(initialVoice).catch(err => console.log(err));
+
     for (let i = 0; i < messagesCount * 2 - 1; i++) {
       const role = i % 2 === 0 ? 'assistant' : 'user';
-      await delay(1000);
+      const voice = i % 2 === 0 ? voices[1] : voices[0];
       setCurrentRole(role);
       setTyping(true);
 
@@ -97,10 +120,15 @@ export const CreatePage = () => {
           content: messageData,
         };
 
+        // Generate and play audio for the AI message, and wait for it to finish
+        const aiVoice = await generateVoice(voice, messageData);
+
         chatMessages = [...chatMessages, aiMessage];
         setChatHistory(chatMessages);
         lastMessage = aiMessage;
         setTyping(false);
+
+        await playAudio(aiVoice).catch(err => console.log(err));
       } catch (error) {
         console.log(error);
         break;
@@ -167,6 +195,7 @@ export const CreatePage = () => {
             </>
           )}
         </div>
+        {audio && <audio autoPlay controls src={audio} />}
       </div>
     </main>
   );

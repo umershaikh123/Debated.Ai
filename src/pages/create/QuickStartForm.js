@@ -13,6 +13,7 @@ import { Divider } from 'components/Divider';
 import { useFormInput } from 'hooks';
 import { useState } from 'react';
 import { tokens } from 'components';
+import { getVoicesByGenders } from 'pages/api/speach/functions';
 
 const Loading = ({ status }) => (
   <div className={styles.loading}>
@@ -70,6 +71,8 @@ export const QuickStartForm = ({ status, delay, onBackClick, startChat }) => {
     const avatars = avatarsAndGenders.map(result => result.avatarUrl);
     const genders = avatarsAndGenders.map(result => result.gender);
 
+    const voices = getVoicesByGenders(genders);
+
     setLoading(false);
     setView('debates');
     await startChat({
@@ -78,6 +81,7 @@ export const QuickStartForm = ({ status, delay, onBackClick, startChat }) => {
       personalities: [],
       messagesCount: messagesCount.value,
       avatars: avatars,
+      voices: voices,
     });
   };
 
