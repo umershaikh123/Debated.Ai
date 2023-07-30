@@ -7,6 +7,7 @@ import { ControlPanelMachine, panelStates } from './MachineStates';
 import { QuickStartForm } from './QuickStartForm';
 import { useMachine } from '@xstate/react';
 import { cssProps, msToNum, numToMs } from 'utils/style';
+import { CustomForm } from './CustomForm';
 
 const ModeButton = ({ animationData, title, description, onClick }) => (
   <button onClick={onClick} className={styles.debateModeContainer}>
@@ -67,6 +68,9 @@ export const ControlPanel = ({ startChat }) => {
             )}
             {isMachineState(panelStates.QUICK_START) && (
               <QuickStartForm status={status} onBackClick={handleBackClick} startChat={startChat} />
+            )}
+            {isMachineState(panelStates.CUSTOM) && (
+              <CustomForm status={status} onBackClick={handleBackClick} startChat={startChat} />
             )}
           </>
         )}

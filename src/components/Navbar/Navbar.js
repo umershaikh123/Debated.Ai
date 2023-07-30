@@ -21,7 +21,6 @@ export const Navbar = () => {
   const { route, asPath } = useRouter();
   const windowSize = useWindowSize();
   const headerRef = useRef();
-  const scrollToHash = useScrollToHash();
   const isMobile = useIsMobile();
   const [fixed, setFixed] = useState(isMobile);
 
@@ -32,13 +31,6 @@ export const Navbar = () => {
 
     setCurrent(asPath);
   }, [asPath]);
-
-  // Handle smooth scroll nav items
-  useEffect(() => {
-    if (!target || route !== '/') return;
-    setCurrent(`${route}${target}`);
-    scrollToHash(target, () => setTarget(null));
-  }, [route, scrollToHash, target]);
 
   // Handle swapping the theme when intersecting with inverse themed elements
   useEffect(() => {
