@@ -5,28 +5,36 @@ const AVATARS_AND_GENDERS_ENDPOINT = '/api/avatarsAndGenders';
 
 // Posts a message to the provided API endpoint and returns the response
 export const postMessage = async (endpoint, messages) => {
-  const response = await fetch(endpoint, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ messages }),
-  });
-  if (!response.ok) {
-    console.error('Failed to fetch from API', response);
-  }
+  try {
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ messages }),
+    });
+    if (!response.ok) {
+      console.error('Failed to fetch from API', response);
+    }
 
-  console.log('response: ', response);
-  // parse the JSON response into a JavaScript object
-  const responseData = await response.json();
-  return responseData;
+    // parse the JSON response into a JavaScript object
+    const responseData = await response.json();
+
+    return responseData;
+  } catch (e) {
+    console.log('Failed to fetch from API', e);
+    return null;
+  }
 };
 
 export const getAvatarsAndGenders = async names => {
+  console.log('names', response);
+
   const response = await postMessage(AVATARS_AND_GENDERS_ENDPOINT, {
     names: names,
   });
 
+  console.log('response in get avatars', response);
   return response.results;
 };
 

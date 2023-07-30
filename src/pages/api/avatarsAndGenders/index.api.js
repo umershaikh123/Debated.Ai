@@ -12,6 +12,7 @@ async function fetchGender(name) {
 
   if (res.ok) {
     data = await res.json();
+    console.log('fetched gender', data);
   } else {
     console.log('Error: ', res.status);
     return;
@@ -29,13 +30,17 @@ async function fetchGender(name) {
 
 // Fetch the avatar for a given gender
 async function fetchAvatar(gender) {
-  const res = await fetch(
-    `https://this-person-does-not-exist.com/new?time=${Date.now()}&gender=${gender}&age=26-35&etnic=all`
-  );
+  const res = await fetch(`https://randomuser.me/api/?gender=${gender}`);
+
+  if (!res.ok) {
+    console.log('Error: ', res.status);
+    return;
+  }
+
   const data = await res.json();
 
   // Construct the avatar URL
-  const avatarUrl = `https://this-person-does-not-exist.com/${data.src}`;
+  const avatarUrl = data.results[0].picture.large;
 
   return avatarUrl;
 }
@@ -61,6 +66,7 @@ export default async function POST(request) {
 
     const results = await Promise.all(promises);
 
+    console.log('fetched all results', results);
     // Wait for all promises to resolve and return the results
     return NextResponse.json({ results });
   } catch (error) {

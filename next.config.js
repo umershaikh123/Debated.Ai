@@ -1,4 +1,5 @@
 const withPWA = require('next-pwa')({
+  disable: process.env.NODE_ENV === 'development',
   dest: 'public',
   register: true,
   skipWaiting: true,
@@ -8,7 +9,13 @@ module.exports = withPWA({
   reactStrictMode: false,
   pageExtensions: ['page.js', 'api.js', '.js'],
   images: {
-    domains: ['ui-avatars.com', 'this-person-does-not-exist.com', 'lh3.googleusercontent.com'],
+    domains: [
+      'ui-avatars.com',
+      'this-person-does-not-exist.com',
+      'lh3.googleusercontent.com',
+      'api.genderize.io',
+      'randomuser.me',
+    ],
   },
   webpack(config, { isServer }) {
     // Run custom scripts

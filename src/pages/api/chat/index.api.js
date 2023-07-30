@@ -77,7 +77,6 @@ export default async function POST(request) {
 
     const prompt = generatePrompt(requestData, isUser);
     const messages = [{ role: 'system', content: prompt }, ...chatHistory];
-    console.log('chatMessages', messages);
     const responseContent = await getOpenAIResponse(messages);
 
     return new NextResponse(JSON.stringify(responseContent));
