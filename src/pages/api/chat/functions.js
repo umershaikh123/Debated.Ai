@@ -28,8 +28,6 @@ export const postMessage = async (endpoint, messages) => {
 };
 
 export const getAvatarsAndGenders = async names => {
-  console.log('names', response);
-
   const response = await postMessage(AVATARS_AND_GENDERS_ENDPOINT, {
     names: names,
   });

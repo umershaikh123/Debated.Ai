@@ -16,4 +16,5 @@ export const ControlPanelMachine = createMachine({
     [panelStates.QUICK_START]: { on: { BACK: panelStates.IDLE } },
     [panelStates.CUSTOM]: { on: { BACK: panelStates.IDLE } },
   },
+  predictableActionArguments: true,
 });
