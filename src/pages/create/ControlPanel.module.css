@@ -7,6 +7,8 @@
   height: 100%;
   padding: 2.5rem 1.5rem 0 1.5rem !important;
 
+  overflow-y: auto;
+
   @media (--mediaMobile) {
     padding-top: 0;
   }
@@ -32,6 +34,10 @@
   &:hover {
     transform: scale(1.025);
   }
+}
+
+.voiceDropdown {
+  margin-top: 2.5rem;
 }
 
 .debateChoice {

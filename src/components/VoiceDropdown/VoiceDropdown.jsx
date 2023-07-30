@@ -46,10 +46,10 @@ const VoiceDropdown = ({ items, className, onVoiceSelected }) => {
   };
 
   const onKeydown = e => {
-    const isDownArrowOrTab = e.keyCode === 40 || e.keyCode === 9;
+    const isDownKey = e.keyCode === 40;
     const isUpArrow = e.keyCode === 38;
 
-    if (isDownArrowOrTab) {
+    if (isDownKey) {
       e.preventDefault();
       setCurIndex((curIndex + 1) % items.length);
     } else if (isUpArrow) {

@@ -114,7 +114,15 @@ export const CustomForm = ({ status, delay, onBackClick, startChat }) => {
     ));
 
     // Add VoiceDropdown at the end of the elements
-    elements.push(<VoiceDropdown items={voiceOptions} onVoiceSelected={setVoice} />);
+    elements.push(
+      <div className={styles.voiceDropdown}>
+        <label className={styles.label} data-filled={true}>
+          Voice
+        </label>
+
+        <VoiceDropdown items={voiceOptions} onVoiceSelected={setVoice} />
+      </div>
+    );
 
     return elements;
   };
