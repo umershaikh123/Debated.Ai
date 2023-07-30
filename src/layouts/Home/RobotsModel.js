@@ -1,4 +1,4 @@
-import { useRef, useEffect, useLayoutEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { useTheme } from 'components/ThemeProvider';
 import { Transition } from 'components/Transition';
 import { useInViewport, useWindowSize } from 'hooks';
@@ -157,7 +157,7 @@ export const RobotsModel = props => {
   }, [windowSize, isInViewport]);
 
   // Animation loop
-  useLayoutEffect(() => {
+  useEffect(() => {
     let animationId;
 
     const animate = () => {
